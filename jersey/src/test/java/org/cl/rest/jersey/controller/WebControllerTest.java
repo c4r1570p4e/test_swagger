@@ -2,6 +2,7 @@ package org.cl.rest.jersey.controller;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.Fail.fail;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -10,9 +11,11 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import org.cl.rest.jersey.dao.RecetteDao;
 import org.cl.rest.jersey.domain.Recette;
@@ -21,6 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.google.common.collect.Lists;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
@@ -29,6 +33,8 @@ import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
+
+import fj.data.Option;
 
 public class WebControllerTest extends JerseyTest {
 
@@ -65,6 +71,7 @@ public class WebControllerTest extends JerseyTest {
 	@Test
 	public void should_get_return_empty_list() {
 		when(recetteDao.getListRecettes()).thenReturn(new ArrayList<Recette>());
+		@SuppressWarnings("rawtypes")
 		List recettes = webResource.path("recettes").get(List.class);
 		assertThat(recettes).isEmpty();
 	}
@@ -108,6 +115,104 @@ public class WebControllerTest extends JerseyTest {
 			verifyZeroInteractions(recetteDao);
 		}
 
+	}
+
+	@Test
+	public void should_not_find_by_id() {
+
+		when(recetteDao.get(anyString())).thenReturn(Option.fromNull((Recette) null));
+
+		try {
+			webResource.path("recettes/12345").get(Recette.class);
+			fail();
+		} catch (UniformInterfaceException e) {
+			assertThat(e.getResponse().getStatus()).isEqualTo(Status.NOT_FOUND.getStatusCode());
+			verify(recetteDao, times(1)).get(anyString());
+		}
+	}
+
+	@Test
+	public void should_find_by_id() {
+
+		Recette recette = createRecette("12345", "fraisier", 3, 2, "Avec une genoise et des fraises...");
+
+		when(recetteDao.get("12345")).thenReturn(Option.some(recette));
+
+		Recette found = webResource.path("recettes/12345").get(Recette.class);
+
+		assertThat(found).isEqualTo(recette);
+	}
+
+	@Test
+	public void should_not_update() {
+
+		Recette recette = createRecette("1", "fraisier", 3, 2, "Avec une genoise et des fraises...");
+
+		try {
+			webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+			fail();
+		} catch (UniformInterfaceException e) {
+			assertThat(e.getResponse().getStatus()).isEqualTo(Status.BAD_REQUEST.getStatusCode());
+		}
+
+		recette = createRecette(null, "fraisier", 3, 2, "Avec une genoise et des fraises...");
+
+		try {
+			webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+			fail();
+		} catch (UniformInterfaceException e) {
+			assertThat(e.getResponse().getStatus()).isEqualTo(Status.BAD_REQUEST.getStatusCode());
+		}
+	}
+
+	@Test
+	public void should_not_update_not_found() {
+
+		Recette recette = createRecette("12345", "fraisier", 3, 2, "Avec une genoise et des fraises...");
+
+		when(recetteDao.update(recette)).thenReturn(0);
+
+		try {
+			webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+			fail();
+		} catch (UniformInterfaceException e) {
+			assertThat(e.getResponse().getStatus()).isEqualTo(Status.NOT_FOUND.getStatusCode());
+		}
+	}
+
+	@Test
+	public void should_update() {
+
+		Recette recette = createRecette("12345", "fraisier", 3, 2, "Avec une genoise et des fraises...");
+		when(recetteDao.update(recette)).thenReturn(1);
+
+		webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+
+		verify(recetteDao, times(1)).update(recette);
+	}
+
+	@Test
+	public void should_find_empty_list_by_libelle() {
+
+		when(recetteDao.findByLibelle(anyString())).thenReturn(new LinkedList<Recette>());
+		Recette[] recettes = webResource.path("recettes/findByLibelle?libellePart=fraisier").get(Recette[].class);
+		assertThat(recettes.length).isEqualTo(0);
+
+		verify(recetteDao, times(1)).findByLibelle(anyString());
+	}
+
+	@Test
+	public void should_find_list_by_libelle() {
+
+		Recette recette1 = createRecette("12345", "macarons chocolat", 1, 2, "bla bla bla");
+		Recette recette2 = createRecette("12345", "Macarons Pistache", 2, 3, "bla bla bla");
+
+		when(recetteDao.findByLibelle("macarons")).thenReturn(Lists.newArrayList(recette1, recette2));
+		Recette[] recettes = webResource.path("recettes/findByLibelle?libellePart=macarons").get(Recette[].class);
+		assertThat(recettes.length).isEqualTo(2);
+		assertThat(recettes).containsOnly(recette1, recette2);
+
+		verify(recetteDao, times(1)).findByLibelle("macarons");
 	}
 
 	private Recette createRecette(String id, String libelle, int niveau, int temps, String detail) {

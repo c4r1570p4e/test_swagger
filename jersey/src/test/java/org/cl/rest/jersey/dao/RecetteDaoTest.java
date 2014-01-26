@@ -30,18 +30,18 @@ public class RecetteDaoTest {
 	}
 
 	@Test
-	public void test_on_empty_list() {
+	public void should_return_empty_list() {
 		assertThat(recetteDao.getListRecettes()).isEmpty();
 	}
 
 	@Test
-	public void test_get_list() {
+	public void should_return_list() {
 		createjeuDeTest();
 		assertThat(recetteDao.getListRecettes()).contains(recette1, recette2);
 	}
 
 	@Test
-	public void test_create_recette() {
+	public void should_create_recette() {
 		Recette recette = new Recette();
 		recette.setLibelle("Ma nouvelle recette");
 		recette.setNiveau(2);
@@ -54,14 +54,14 @@ public class RecetteDaoTest {
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void test_create_recette_fail() {
+	public void should_not_create_null_recette() {
 
 		recetteDao.create(null);
 
 	}
 
 	@Test
-	public void test_get_recette() {
+	public void should_return_recette_by_id() {
 
 		createjeuDeTest();
 
@@ -75,7 +75,7 @@ public class RecetteDaoTest {
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void test_get_recette_fail() {
+	public void should_not_get_recette_with_null_id() {
 
 		createjeuDeTest();
 
@@ -83,7 +83,7 @@ public class RecetteDaoTest {
 	}
 
 	@Test
-	public void test_update() {
+	public void should_update() {
 
 		createjeuDeTest();
 
@@ -99,8 +99,8 @@ public class RecetteDaoTest {
 		newRecette.setNiveau(12);
 		newRecette.setTemps(5);
 		newRecette.setRecette(newRe7);
-
-		recetteDao.update(newRecette);
+		
+		assertThat(recetteDao.update(newRecette)).isEqualTo(1);
 
 		Recette recetteReloaded = recetteDao.get(recette1.getId()).some();
 
@@ -109,35 +109,32 @@ public class RecetteDaoTest {
 
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void test_update_fail_not_exist() {
+	@Test
+	public void should_not_update_non_existant_recette() {
 
 		createjeuDeTest();
 
 		recette1.setId("AAAAAAA");
 
-		recetteDao.update(recette1);
-
+		assertThat(recetteDao.update(recette1)).isEqualTo(0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void test_update_fail_no_id() {
+	public void should_not_update_with_no_id() {
 
 		createjeuDeTest();
 
 		recette1.setId(null);
-
 		recetteDao.update(recette1);
 
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void test_update_fail_null() {
+	public void should_not_update_null() {
 
 		createjeuDeTest();
 
 		recetteDao.update(null);
-
 	}
 
 	private void createjeuDeTest() {
@@ -155,6 +152,25 @@ public class RecetteDaoTest {
 		recette2.setTemps(3);
 		recette2.setRecette("Prendre des macarrons et des chocolat : on obtient des macarrons au chocolat");
 		recetteDao.create(recette2);
+	}
+
+	@Test
+	public void should_not_find_by_libelle() {
+
+		createjeuDeTest();
+
+		assertThat(recetteDao.findByLibelle("fraisier")).isEmpty();
+		assertThat(recetteDao.findByLibelle(null)).isEmpty();
+	}
+
+	@Test
+	public void should_find_by_libelle() {
+
+		createjeuDeTest();
+
+		assertThat(recetteDao.findByLibelle("maccarons")).containsOnly(recette1, recette2);
+		assertThat(recetteDao.findByLibelle("chocolat")).containsOnly(recette2);
+		assertThat(recetteDao.findByLibelle("Maccarons pistache")).containsOnly(recette1);
 
 	}
 

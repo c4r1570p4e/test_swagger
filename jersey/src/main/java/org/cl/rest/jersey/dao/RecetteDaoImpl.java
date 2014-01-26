@@ -41,17 +41,19 @@ public class RecetteDaoImpl implements RecetteDao {
 	}
 
 	@Override
-	public void update(Recette recette) {
+	public int update(Recette recette) {
 
 		if (recette.getId() == null) {
 			throw new IllegalArgumentException("id null");
 		}
 
 		if (!recettes.containsKey(recette.getId())) {
-			throw new IllegalArgumentException("Recette n'existe pas");
+			return 0;
 		}
 
 		recettes.put(recette.getId(), recette);
+
+		return 1;
 
 	}
 
@@ -66,6 +68,25 @@ public class RecetteDaoImpl implements RecetteDao {
 
 	public void deleteAll() {
 		recettes.clear();
+	}
+
+	@Override
+	public List<Recette> findByLibelle(String libellePart) {
+
+		List<Recette> retour = new LinkedList<Recette>();
+
+		if (libellePart == null) {
+			return retour;
+		}
+
+		for (Recette recette : recettes.values()) {
+
+			if (recette.getLibelle() != null && recette.getLibelle().toUpperCase().contains(libellePart.toUpperCase())) {
+				retour.add(recette);
+			}
+		}
+
+		return retour;
 	}
 
 }

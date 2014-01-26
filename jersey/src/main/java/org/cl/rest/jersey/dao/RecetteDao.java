@@ -4,18 +4,20 @@ import java.util.List;
 
 import org.cl.rest.jersey.domain.Recette;
 
-import com.sun.istack.NotNull;
-
 import fj.data.Option;
 
 public interface RecetteDao {
 
 	List<Recette> getListRecettes();
 
-	String create(@NotNull Recette recette);
+	String create(Recette recette);
 
-	void update(@NotNull Recette recette);
+	int update(Recette recette);
 
-	Option<Recette> get(@NotNull String id);
+	Option<Recette> get(String id);
+	
+	List<Recette> findByLibelle(String libelle);
+	
+	
 
 }

@@ -19,6 +19,7 @@ public class InjectableProviderContext extends InjectInjectableProvider {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <T>  T getInjectableObjectForClass(Class<T> clazz) {
 		for (Object injectable : injectableObjects) {
 			if (clazz.isAssignableFrom(injectable.getClass())) {

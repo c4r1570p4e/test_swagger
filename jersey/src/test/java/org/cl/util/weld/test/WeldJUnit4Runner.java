@@ -7,11 +7,12 @@ import org.junit.runners.model.InitializationError;
 
 public class WeldJUnit4Runner extends BlockJUnit4ClassRunner {
 
+	@SuppressWarnings("rawtypes")
 	private final Class klass;
 	private final Weld weld;
 	private final WeldContainer container;
 
-	public WeldJUnit4Runner(final Class klass) throws InitializationError {
+	public WeldJUnit4Runner(@SuppressWarnings("rawtypes") final Class klass) throws InitializationError {
 		super(klass);
 
 		this.klass = klass;
@@ -21,6 +22,7 @@ public class WeldJUnit4Runner extends BlockJUnit4ClassRunner {
 
 	@Override
 	protected Object createTest() throws Exception {
+		@SuppressWarnings("unchecked")
 		final Object test = container.instance().select(klass).get();
 
 		return test;
