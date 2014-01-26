@@ -29,7 +29,7 @@ import fj.data.Option;
 @Singleton
 @Path("recettes")
 @Produces({ "application/json" })
-public class WebController {
+public class RecetteController {
 
 	@Context
 	private UriInfo uriInfo;
@@ -38,7 +38,7 @@ public class WebController {
 	@Setter
 	private RecetteDao recetteDao;
 
-	public WebController() {
+	public RecetteController() {
 		super();
 	}
 

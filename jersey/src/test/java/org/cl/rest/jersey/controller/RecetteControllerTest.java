@@ -36,7 +36,7 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 
 import fj.data.Option;
 
-public class WebControllerTest extends JerseyTest {
+public class RecetteControllerTest extends JerseyTest {
 
 	private static AppDescriptor APP_DESCRIPTOR;
 
@@ -59,7 +59,7 @@ public class WebControllerTest extends JerseyTest {
 
 	private RecetteDao recetteDao = InjectableProviderContext.getInjectableObjectForClass(RecetteDao.class);
 
-	public WebControllerTest() throws Exception {
+	public RecetteControllerTest() throws Exception {
 		super(APP_DESCRIPTOR);
 	}
 
