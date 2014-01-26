@@ -104,7 +104,7 @@ public class RecetteController {
 	}
 
 	@GET
-	@Path("findByLibelle?libellePart={libellePart}")
+	@Path("findByLibelle/{libellePart}")
 	public List<Recette> findRecettesByLibelle(@PathParam("libellePart") String libellePart) {
 		return recetteDao.findByLibelle(libellePart);
 	}
