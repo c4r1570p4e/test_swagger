@@ -12,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -104,8 +105,8 @@ public class RecetteController {
 	}
 
 	@GET
-	@Path("findByLibelle/{libellePart}")
-	public List<Recette> findRecettesByLibelle(@PathParam("libellePart") String libellePart) {
+	@Path("findByLibelle")
+	public List<Recette> findRecettesByLibelle(@QueryParam("libellePart") String libellePart) {
 		return recetteDao.findByLibelle(libellePart);
 	}
 

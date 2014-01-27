@@ -195,7 +195,8 @@ public class RecetteControllerTest extends JerseyTest {
 	public void should_find_empty_list_by_libelle() {
 
 		when(recetteDao.findByLibelle(anyString())).thenReturn(new LinkedList<Recette>());
-		Recette[] recettes = webResource.path("recettes/findByLibelle/fraisier").get(Recette[].class);
+		Recette[] recettes = webResource.path("recettes/findByLibelle").queryParam("libellePart", "fraisier")
+				.get(Recette[].class);
 		assertThat(recettes.length).isEqualTo(0);
 
 		verify(recetteDao, times(1)).findByLibelle(anyString());
@@ -208,7 +209,8 @@ public class RecetteControllerTest extends JerseyTest {
 		Recette recette2 = createRecette("12345", "Macarons Pistache", 2, 3, "bla bla bla");
 
 		when(recetteDao.findByLibelle("macarons")).thenReturn(Lists.newArrayList(recette1, recette2));
-		Recette[] recettes = webResource.path("recettes/findByLibelle/macarons").get(Recette[].class);
+		Recette[] recettes = webResource.path("recettes/findByLibelle").queryParam("libellePart", "macarons")
+				.get(Recette[].class);
 		assertThat(recettes.length).isEqualTo(2);
 		assertThat(recettes).containsOnly(recette1, recette2);
 
