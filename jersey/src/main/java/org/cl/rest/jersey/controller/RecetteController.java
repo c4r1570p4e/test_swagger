@@ -30,7 +30,7 @@ import fj.data.Option;
 
 @Singleton
 @Path("recettes")
-@Produces({ "application/json" })
+@Produces({ "application/json","application/xml" })
 public class RecetteController {
 
 	@Context
@@ -50,7 +50,7 @@ public class RecetteController {
 	}
 
 	@POST
-	@Consumes({ "application/json" })
+	@Consumes({ "application/json","application/xml" })
 	public Response createNewRecette(Recette recette) {
 
 		if (recette == null || Strings.isNullOrEmpty(recette.getLibelle())) {
@@ -67,7 +67,7 @@ public class RecetteController {
 
 	@PUT
 	@Path("{id}")
-	@Consumes({ "application/json" })
+	@Consumes({ "application/json","application/xml" })
 	public Response updateRecette(@PathParam("id") String id, Recette recette) {
 
 		if (id == null || recette == null || Strings.isNullOrEmpty(recette.getId())

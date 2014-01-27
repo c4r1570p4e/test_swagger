@@ -36,9 +36,11 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 
 import fj.data.Option;
 
-public class RecetteControllerTest extends JerseyTest {
+public abstract class RecetteControllerTest extends JerseyTest {
 
 	private static AppDescriptor APP_DESCRIPTOR;
+	
+	protected MediaType mediaType = null;
 
 	static {
 
@@ -71,8 +73,7 @@ public class RecetteControllerTest extends JerseyTest {
 	@Test
 	public void should_get_return_empty_list() {
 		when(recetteDao.getListRecettes()).thenReturn(new ArrayList<Recette>());
-		@SuppressWarnings("rawtypes")
-		List recettes = webResource.path("recettes").get(List.class);
+		Recette[] recettes = webResource.path("recettes").accept(mediaType).get(Recette[].class);
 		assertThat(recettes).isEmpty();
 	}
 
@@ -86,7 +87,7 @@ public class RecetteControllerTest extends JerseyTest {
 		List<Recette> dataRecettes = Arrays.asList(r1, r2, r3);
 
 		when(recetteDao.getListRecettes()).thenReturn(dataRecettes);
-		Recette[] recettes = webResource.path("recettes").get(Recette[].class);
+		Recette[] recettes = webResource.path("recettes").accept(mediaType).get(Recette[].class);
 
 		assertThat(recettes).containsOnly(r1, r2, r3);
 	}
@@ -98,7 +99,7 @@ public class RecetteControllerTest extends JerseyTest {
 		String newId = "123456789";
 
 		when(recetteDao.create(recette)).thenReturn(newId);
-		webResource.path("recettes").type(MediaType.APPLICATION_JSON).post(recette);
+		webResource.path("recettes").accept(mediaType).type(mediaType).post(recette);
 		verify(recetteDao, times(1)).create(recette);
 	}
 
@@ -108,7 +109,8 @@ public class RecetteControllerTest extends JerseyTest {
 		Recette recette = new Recette();
 
 		try {
-			webResource.path("recettes").type(MediaType.APPLICATION_JSON).post(recette);
+			webResource.path("recettes").accept(mediaType).type(mediaType)
+					.post(recette);
 			fail();
 		} catch (UniformInterfaceException e) {
 			assertThat(e.getResponse().getStatus()).isEqualTo(400);
@@ -123,7 +125,7 @@ public class RecetteControllerTest extends JerseyTest {
 		when(recetteDao.get(anyString())).thenReturn(Option.fromNull((Recette) null));
 
 		try {
-			webResource.path("recettes/12345").get(Recette.class);
+			webResource.path("recettes/12345").accept(mediaType).get(Recette.class);
 			fail();
 		} catch (UniformInterfaceException e) {
 			assertThat(e.getResponse().getStatus()).isEqualTo(Status.NOT_FOUND.getStatusCode());
@@ -138,7 +140,7 @@ public class RecetteControllerTest extends JerseyTest {
 
 		when(recetteDao.get("12345")).thenReturn(Option.some(recette));
 
-		Recette found = webResource.path("recettes/12345").get(Recette.class);
+		Recette found = webResource.path("recettes/12345").accept(mediaType).get(Recette.class);
 
 		assertThat(found).isEqualTo(recette);
 	}
@@ -149,7 +151,8 @@ public class RecetteControllerTest extends JerseyTest {
 		Recette recette = createRecette("1", "fraisier", 3, 2, "Avec une genoise et des fraises...");
 
 		try {
-			webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+			webResource.path("recettes/12345").accept(mediaType).type(mediaType)
+					.put(recette);
 			fail();
 		} catch (UniformInterfaceException e) {
 			assertThat(e.getResponse().getStatus()).isEqualTo(Status.BAD_REQUEST.getStatusCode());
@@ -158,7 +161,8 @@ public class RecetteControllerTest extends JerseyTest {
 		recette = createRecette(null, "fraisier", 3, 2, "Avec une genoise et des fraises...");
 
 		try {
-			webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+			webResource.path("recettes/12345").accept(mediaType).type(mediaType)
+					.put(recette);
 			fail();
 		} catch (UniformInterfaceException e) {
 			assertThat(e.getResponse().getStatus()).isEqualTo(Status.BAD_REQUEST.getStatusCode());
@@ -173,7 +177,8 @@ public class RecetteControllerTest extends JerseyTest {
 		when(recetteDao.update(recette)).thenReturn(0);
 
 		try {
-			webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+			webResource.path("recettes/12345").accept(mediaType).type(mediaType)
+					.put(recette);
 			fail();
 		} catch (UniformInterfaceException e) {
 			assertThat(e.getResponse().getStatus()).isEqualTo(Status.NOT_FOUND.getStatusCode());
@@ -186,7 +191,8 @@ public class RecetteControllerTest extends JerseyTest {
 		Recette recette = createRecette("12345", "fraisier", 3, 2, "Avec une genoise et des fraises...");
 		when(recetteDao.update(recette)).thenReturn(1);
 
-		webResource.path("recettes/12345").type(MediaType.APPLICATION_JSON).put(recette);
+		webResource.path("recettes/12345").accept(mediaType).type(mediaType)
+				.put(recette);
 
 		verify(recetteDao, times(1)).update(recette);
 	}
@@ -196,7 +202,7 @@ public class RecetteControllerTest extends JerseyTest {
 
 		when(recetteDao.findByLibelle(anyString())).thenReturn(new LinkedList<Recette>());
 		Recette[] recettes = webResource.path("recettes/findByLibelle").queryParam("libellePart", "fraisier")
-				.get(Recette[].class);
+				.accept(mediaType).get(Recette[].class);
 		assertThat(recettes.length).isEqualTo(0);
 
 		verify(recetteDao, times(1)).findByLibelle(anyString());
@@ -210,7 +216,7 @@ public class RecetteControllerTest extends JerseyTest {
 
 		when(recetteDao.findByLibelle("macarons")).thenReturn(Lists.newArrayList(recette1, recette2));
 		Recette[] recettes = webResource.path("recettes/findByLibelle").queryParam("libellePart", "macarons")
-				.get(Recette[].class);
+				.accept(mediaType).get(Recette[].class);
 		assertThat(recettes.length).isEqualTo(2);
 		assertThat(recettes).containsOnly(recette1, recette2);
 
@@ -221,7 +227,7 @@ public class RecetteControllerTest extends JerseyTest {
 	public void should_delete() {
 
 		when(recetteDao.delete("1")).thenReturn(1);
-		webResource.path("recettes/1").delete();
+		webResource.path("recettes/1").accept(mediaType).delete();
 		verify(recetteDao, times(1)).delete("1");
 	}
 
@@ -230,7 +236,7 @@ public class RecetteControllerTest extends JerseyTest {
 
 		when(recetteDao.delete("1")).thenReturn(0);
 		try {
-			webResource.path("recettes/1").delete();
+			webResource.path("recettes/1").accept(mediaType).delete();
 			fail();
 		} catch (UniformInterfaceException e) {
 			assertThat(e.getResponse().getStatus()).isEqualTo(Status.NOT_FOUND.getStatusCode());

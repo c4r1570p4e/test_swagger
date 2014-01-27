@@ -1,9 +1,12 @@
 package org.cl.rest.jersey.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
+@XmlRootElement
 @EqualsAndHashCode(of = { "libelle" })
 public class Recette {
 
