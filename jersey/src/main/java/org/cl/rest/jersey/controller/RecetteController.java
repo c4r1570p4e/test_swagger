@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -110,4 +111,19 @@ public class RecetteController {
 		return recetteDao.findByLibelle(libellePart);
 	}
 
+	@DELETE
+	@Path("{id}")
+	public Response deleteRecette(@PathParam("id") String id) {
+
+		if (Strings.isNullOrEmpty(id)) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+
+		if (this.recetteDao.delete(id) == 1) {
+			return Response.status(Status.OK).build();
+		} else {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+	}	
+	
 }

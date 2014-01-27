@@ -206,7 +206,7 @@ public class RecetteControllerTest extends JerseyTest {
 	public void should_find_list_by_libelle() {
 
 		Recette recette1 = createRecette("12345", "macarons chocolat", 1, 2, "bla bla bla");
-		Recette recette2 = createRecette("12345", "Macarons Pistache", 2, 3, "bla bla bla");
+		Recette recette2 = createRecette("67890", "Macarons Pistache", 2, 3, "bla bla bla");
 
 		when(recetteDao.findByLibelle("macarons")).thenReturn(Lists.newArrayList(recette1, recette2));
 		Recette[] recettes = webResource.path("recettes/findByLibelle").queryParam("libellePart", "macarons")
@@ -215,6 +215,29 @@ public class RecetteControllerTest extends JerseyTest {
 		assertThat(recettes).containsOnly(recette1, recette2);
 
 		verify(recetteDao, times(1)).findByLibelle("macarons");
+	}
+
+	@Test
+	public void should_delete() {
+
+		when(recetteDao.delete("1")).thenReturn(1);
+		webResource.path("recettes/1").delete();
+		verify(recetteDao, times(1)).delete("1");
+	}
+
+	@Test
+	public void should_not_delete() {
+
+		when(recetteDao.delete("1")).thenReturn(0);
+		try {
+			webResource.path("recettes/1").delete();
+			fail();
+		} catch (UniformInterfaceException e) {
+			assertThat(e.getResponse().getStatus()).isEqualTo(Status.NOT_FOUND.getStatusCode());
+		}
+
+		verify(recetteDao, times(1)).delete("1");
+
 	}
 
 	private Recette createRecette(String id, String libelle, int niveau, int temps, String detail) {

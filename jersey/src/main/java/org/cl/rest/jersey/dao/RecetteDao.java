@@ -18,6 +18,8 @@ public interface RecetteDao {
 	
 	List<Recette> findByLibelle(String libelle);
 	
+	int delete(String id);
+	
 	
 
 }

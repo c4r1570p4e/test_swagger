@@ -99,7 +99,7 @@ public class RecetteDaoTest {
 		newRecette.setNiveau(12);
 		newRecette.setTemps(5);
 		newRecette.setRecette(newRe7);
-		
+
 		assertThat(recetteDao.update(newRecette)).isEqualTo(1);
 
 		Recette recetteReloaded = recetteDao.get(recette1.getId()).some();
@@ -171,6 +171,28 @@ public class RecetteDaoTest {
 		assertThat(recetteDao.findByLibelle("maccarons")).containsOnly(recette1, recette2);
 		assertThat(recetteDao.findByLibelle("chocolat")).containsOnly(recette2);
 		assertThat(recetteDao.findByLibelle("Maccarons pistache")).containsOnly(recette1);
+
+	}
+
+	@Test
+	public void should_delete() {
+
+		createjeuDeTest();
+
+		assertThat(recetteDao.getListRecettes().size()).isEqualTo(2);
+		assertThat(recetteDao.delete(recette1.getId())).isEqualTo(1);
+		assertThat(recetteDao.getListRecettes()).containsExactly(recette2);
+
+	}
+
+	@Test
+	public void should_not_delete() {
+
+		createjeuDeTest();
+
+		assertThat(recetteDao.getListRecettes().size()).isEqualTo(2);
+		assertThat(recetteDao.delete("0")).isEqualTo(0);
+		assertThat(recetteDao.getListRecettes()).containsOnly(recette1, recette2);
 
 	}
 

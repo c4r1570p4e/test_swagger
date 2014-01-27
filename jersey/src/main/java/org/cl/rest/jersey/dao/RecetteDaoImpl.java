@@ -89,4 +89,14 @@ public class RecetteDaoImpl implements RecetteDao {
 		return retour;
 	}
 
+	@Override
+	public int delete(String id) {
+
+		if (recettes.remove(id) != null) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
 }
