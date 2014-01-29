@@ -7,4 +7,13 @@
   </parent>
   <artifactId>spring_mvc</artifactId>
   <packaging>war</packaging>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>test_swagger</groupId>
+  		<artifactId>spring_common</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  </dependencies>  
+  
 </project>

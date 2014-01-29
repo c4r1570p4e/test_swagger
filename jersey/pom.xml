@@ -35,19 +35,6 @@
 			<version>${jersey.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>0.12.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.functionaljava</groupId>
-			<artifactId>functionaljava</artifactId>
-			<version>3.1</version>
-		</dependency>
-
-
 		<!-- test -->
 
 		<dependency>

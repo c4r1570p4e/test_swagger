@@ -7,6 +7,8 @@
 	<packaging>pom</packaging>
 
 	<properties>
+		<spring.version>3.2.7.RELEASE</spring.version>
+	
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -37,16 +39,24 @@
 
 	<modules>
 		<module>jersey</module>
+		<module>spring_common</module>
 		<module>spring_jersey</module>
 		<module>spring_mvc</module>
 	</modules>
 
 	<dependencies>
+	
+		<!-- utils -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.12.4</version>
-			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.functionaljava</groupId>
+			<artifactId>functionaljava</artifactId>
+			<version>3.1</version>
 		</dependency>
 
 
@@ -68,6 +78,8 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
 		</dependency>
+
+		<!-- test -->
 
 		<dependency>
 			<groupId>junit</groupId>
