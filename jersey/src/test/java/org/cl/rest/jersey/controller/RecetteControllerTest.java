@@ -40,8 +40,6 @@ public abstract class RecetteControllerTest extends JerseyTest {
 
 	private static AppDescriptor APP_DESCRIPTOR;
 	
-	protected MediaType mediaType = null;
-
 	static {
 
 		InjectableProviderContext.init(Mockito.mock(RecetteDao.class));
@@ -57,12 +55,15 @@ public abstract class RecetteControllerTest extends JerseyTest {
 		APP_DESCRIPTOR = webAppDescriptor.build();
 	}
 
+	protected MediaType mediaType = null;
+	
 	private WebResource webResource = resource();
 
 	private RecetteDao recetteDao = InjectableProviderContext.getInjectableObjectForClass(RecetteDao.class);
 
-	public RecetteControllerTest() throws Exception {
+	public RecetteControllerTest(MediaType mediaType) throws Exception {
 		super(APP_DESCRIPTOR);
+		this.mediaType = mediaType;
 	}
 
 	@Before
