@@ -43,13 +43,13 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<!-- utils -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>14.0.1</version>
 		</dependency>
-
 
 		<!-- test -->
 		<dependency>

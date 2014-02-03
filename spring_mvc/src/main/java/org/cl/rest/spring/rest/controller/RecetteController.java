@@ -33,12 +33,18 @@ public class RecetteController {
 		super();
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
 	@ResponseBody
 	public List<Recette> getRecettes() {
 		return recetteDao.getListRecettes();
 	}
 
+	@RequestMapping(method = RequestMethod.GET, produces = {"application/xml" })
+	@ResponseBody
+	public RecetteCollection getRecettesJaxb() {
+		return new RecetteCollection(getRecettes());
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json", "application/xml" })
 	@ResponseBody
 	public void createNewRecette(@RequestBody Recette recette, HttpServletRequest request, HttpServletResponse response)
@@ -58,7 +64,7 @@ public class RecetteController {
 	}
 
 	private String getCreatedUri(HttpServletRequest request, String id) {
-		return request.getContextPath() + "/recettes/" + id;
+		return request.getRequestURL() + "/" + id;
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
@@ -107,10 +113,16 @@ public class RecetteController {
 		}
 	}
 
-	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET)
+	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, consumes = { "application/json" })
 	@ResponseBody
 	public List<Recette> findRecettesByLibelle(@RequestParam("libellePart") String libellePart) {
 		return recetteDao.findByLibelle(libellePart);
+	}
+	
+	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, consumes = { "application/xml" })
+	@ResponseBody
+	public RecetteCollection findRecettesByLibelleJaxb(@RequestParam("libellePart") String libellePart) {
+		return new RecetteCollection(findRecettesByLibelle(libellePart));
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
