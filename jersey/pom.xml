@@ -50,6 +50,14 @@
 			<version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- swagger -->
+
+		<dependency>
+			<groupId>com.wordnik</groupId>
+			<artifactId>swagger-jersey-jaxrs_2.10</artifactId>
+			<version>1.3.0</version>
+		</dependency>
 
 	</dependencies>
 
