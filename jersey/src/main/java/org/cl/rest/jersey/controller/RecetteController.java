@@ -66,7 +66,7 @@ public class RecetteController {
 	}
 
 	@PUT
-	@Path("{id}")
+	@Path("/{id}")
 	@Consumes({ "application/json","application/xml" })
 	public Response updateRecette(@PathParam("id") String id, Recette recette) {
 
@@ -89,7 +89,7 @@ public class RecetteController {
 	}
 
 	@GET
-	@Path("{id}")
+	@Path("/{id}")
 	public Response getRecette(@PathParam("id") String id) {
 
 		if (Strings.isNullOrEmpty(id)) {
@@ -106,13 +106,13 @@ public class RecetteController {
 	}
 
 	@GET
-	@Path("findByLibelle")
+	@Path("/findByLibelle")
 	public List<Recette> findRecettesByLibelle(@QueryParam("libellePart") String libellePart) {
 		return recetteDao.findByLibelle(libellePart);
 	}
 
 	@DELETE
-	@Path("{id}")
+	@Path("/{id}")
 	public Response deleteRecette(@PathParam("id") String id) {
 
 		if (Strings.isNullOrEmpty(id)) {
