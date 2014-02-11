@@ -14,7 +14,7 @@
 	</context-param>
 
 	<servlet>
-		<servlet-name>SpringApplication</servlet-name>
+		<servlet-name>restApplication</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
@@ -24,7 +24,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>SpringApplication</servlet-name>
+		<servlet-name>restApplication</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
