@@ -8,6 +8,8 @@
 
 	<properties>
 		<spring.version>3.2.6.RELEASE</spring.version>
+		<slf4j.version>1.7.6</slf4j.version>
+		
 	
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -63,14 +65,13 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.5</version>
-			<scope>runtime</scope>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>

@@ -64,6 +64,12 @@
 			<artifactId>spring-web</artifactId>
 			<groupId>org.springframework</groupId>
 			<version>${spring.version}</version>
+			<exclusions>
+			   <exclusion>
+			      <groupId>commons-logging</groupId>
+			      <artifactId>commons-logging</artifactId>
+			   </exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- test -->
