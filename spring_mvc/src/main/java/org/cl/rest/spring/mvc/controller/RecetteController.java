@@ -29,7 +29,7 @@ import fj.data.Option;
 
 @Controller
 @RequestMapping(value = "/recettes", produces = { "application/json" })
-@Api(value = "recettes", description = "Réferentiel de recettes de desserts")
+@Api(value = "/recettes", description = "Réferentiel de recettes de deserts")
 public class RecetteController {
 
 	@Autowired
@@ -41,17 +41,19 @@ public class RecetteController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	@ApiOperation(value = "Liste les recettes", notes = "Retourne la liste de toutes les recettes de dessert.", response = Recette.class, responseContainer = "List")
+	@ApiOperation(value = "Liste les recettes", notes = "Retrourne la liste de toutes les recettes de dessert.", 
+	response=Recette.class, responseContainer="List")	
 	public List<Recette> getRecettes() {
 		return recetteDao.getListRecettes();
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json"})
 	@ResponseBody
-	@ApiOperation(value = "Créé une nouvelle recette.", notes = "Permet de créer une nouvelle recette, l'id de la recette est affecté par l'API.")
-	@ApiResponses(value = {
-			@ApiResponse(code = 400, message = "Si il n'y a pas de recette passée, ou si la recette n'a pas de libelle"),
-			@ApiResponse(code = 201, message = "La recette a été enregistré. L'url de la ressource crée est retourné dans le header 'location'.") })
+	@ApiOperation(value="Créé une nouvelle recette.", notes="Permet de créer une nouvelle recette, l'id de la recette est affecté par l'API.")
+	@ApiResponses(value = { 
+		@ApiResponse(code = 400, message = "Si il n'y a pas de recette passée, ou si la recette n'a pas de libelle"),
+		@ApiResponse(code = 201, message = "La recette a été enregistré. L'url de la ressource crée est retourné dans le header 'location'.")
+		})		
 	public void createNewRecette(@RequestBody Recette recette, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 
