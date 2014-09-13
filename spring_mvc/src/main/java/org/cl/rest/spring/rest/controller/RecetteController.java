@@ -113,13 +113,13 @@ public class RecetteController {
 		}
 	}
 
-	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, consumes = { "application/json" })
+	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, produces = { "application/json" })
 	@ResponseBody
 	public List<Recette> findRecettesByLibelle(@RequestParam("libellePart") String libellePart) {
 		return recetteDao.findByLibelle(libellePart);
 	}
 	
-	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, consumes = { "application/xml" })
+	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, produces = { "application/xml" })
 	@ResponseBody
 	public RecetteCollection findRecettesByLibelleJaxb(@RequestParam("libellePart") String libellePart) {
 		return new RecetteCollection(findRecettesByLibelle(libellePart));
