@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>14.0.1</version>
+			<version>16.0.1</version>
 		</dependency>
 
 		<!-- test -->
@@ -64,6 +64,14 @@
 			<artifactId>json-path-assert</artifactId>
 			<version>0.9.1</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- swagger -->
+
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>0.8.8</version>
 		</dependency>
 
 	</dependencies>
