@@ -47,6 +47,7 @@
 		<module>spring_mvc</module>
 		<module>spring_resteasy</module>
 		<module>spring_resteasy_jacks1</module>
+		<module>swagger-ui</module>
 	</modules>
 
 	<dependencies>
