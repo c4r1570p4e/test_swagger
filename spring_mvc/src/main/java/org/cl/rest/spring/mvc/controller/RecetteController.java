@@ -29,7 +29,6 @@ import fj.data.Option;
 
 @Controller
 @RequestMapping(value = "/recettes", produces = { "application/json" })
-@Api(value = "/recettes", description = "Réferentiel de recettes de deserts")
 @Api(value = "recettes", description = "Réferentiel de recettes de desserts")
 public class RecetteController {
 
