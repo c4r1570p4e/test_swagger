@@ -23,7 +23,7 @@ import com.google.common.base.Strings;
 import fj.data.Option;
 
 @Controller
-@RequestMapping(value = "/recettes", produces = { "application/json", "application/xml" })
+@RequestMapping(value = "/recettes", produces = { "application/json" })
 public class RecetteController {
 
 	@Autowired
@@ -33,19 +33,13 @@ public class RecetteController {
 		super();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Recette> getRecettes() {
 		return recetteDao.getListRecettes();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, produces = {"application/xml" })
-	@ResponseBody
-	public RecetteCollection getRecettesJaxb() {
-		return new RecetteCollection(getRecettes());
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json", "application/xml" })
+	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json"})
 	@ResponseBody
 	public void createNewRecette(@RequestBody Recette recette, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
@@ -86,7 +80,7 @@ public class RecetteController {
 		}
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.PUT, consumes = { "application/json", "application/xml" })
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT, consumes = { "application/json" })
 	@ResponseBody
 	public void updateRecette(@PathVariable String id, @RequestBody Recette recette, HttpServletResponse response)
 			throws IOException {
@@ -113,18 +107,12 @@ public class RecetteController {
 		}
 	}
 
-	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, produces = { "application/json" })
+	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Recette> findRecettesByLibelle(@RequestParam("libellePart") String libellePart) {
 		return recetteDao.findByLibelle(libellePart);
 	}
-	
-	@RequestMapping(value = "findByLibelle", method = RequestMethod.GET, produces = { "application/xml" })
-	@ResponseBody
-	public RecetteCollection findRecettesByLibelleJaxb(@RequestParam("libellePart") String libellePart) {
-		return new RecetteCollection(findRecettesByLibelle(libellePart));
-	}
-	
+
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteRecette(@PathVariable String id, HttpServletResponse response) throws IOException {
