@@ -9,6 +9,38 @@
 	<artifactId>spring_mvc</artifactId>
 	<packaging>war</packaging>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<apiSources>
+						<apiSource>
+							<locations>org.cl.rest.spring.rest.controller</locations>
+							<apiVersion>0.1</apiVersion>
+							<basePath>http://localhost:8080/spring_mvc/rest/</basePath>
+							<swaggerDirectory>${project.build.directory}/generated/swagger-ui</swaggerDirectory>
+					        <outputTemplate>${basedir}/src/main/resources/strapdown.html.mustache</outputTemplate>
+					        <mustacheFileRoot>${basedir}/src/main/resources/</mustacheFileRoot>
+					        <outputPath>${project.build.directory}/generated-html/document.html</outputPath>							
+						</apiSource>
+					</apiSources>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
 	<dependencies>
 
 		<!-- spring -->
