@@ -44,6 +44,7 @@
 		<module>spring_common</module>
 		<module>spring_jersey</module>
 		<module>spring_mvc</module>
+		<module>spring_resteasy</module>
 	</modules>
 
 	<dependencies>
