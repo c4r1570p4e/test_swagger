@@ -94,8 +94,7 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>		
-		
-		
+
 		<!-- swagger -->
 		<dependency>
 		    <groupId>com.wordnik</groupId>
