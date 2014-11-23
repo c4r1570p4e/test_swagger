@@ -19,8 +19,8 @@ import javax.ws.rs.core.UriInfo;
 
 import lombok.Setter;
 
-import org.cl.rest.spring.dao.RecetteDao;
-import org.cl.rest.spring.domain.Recette;
+import org.cl.rest.spring.resteasy.dao.RecetteDao;
+import org.cl.rest.spring.resteasy.domain.Recette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
