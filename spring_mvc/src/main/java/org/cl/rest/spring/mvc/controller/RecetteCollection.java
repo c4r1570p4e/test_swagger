@@ -1,11 +1,11 @@
-package org.cl.rest.spring.rest.controller;
+package org.cl.rest.spring.mvc.controller;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.cl.rest.spring.domain.Recette;
+import org.cl.rest.spring.mvc.domain.Recette;
 
 @XmlRootElement(name="recettes")
 public class RecetteCollection {

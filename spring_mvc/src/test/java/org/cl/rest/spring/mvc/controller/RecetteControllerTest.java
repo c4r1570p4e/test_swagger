@@ -1,4 +1,4 @@
-package org.cl.rest.spring.rest.controller;
+package org.cl.rest.spring.mvc.controller;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
@@ -17,8 +17,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.cl.rest.spring.dao.RecetteDao;
-import org.cl.rest.spring.domain.Recette;
+import org.cl.rest.spring.mvc.dao.RecetteDao;
+import org.cl.rest.spring.mvc.domain.Recette;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

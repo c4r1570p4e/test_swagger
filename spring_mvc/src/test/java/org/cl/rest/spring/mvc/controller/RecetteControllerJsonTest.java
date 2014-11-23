@@ -1,10 +1,10 @@
-package org.cl.rest.spring.rest.controller;
+package org.cl.rest.spring.mvc.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import org.cl.rest.spring.domain.Recette;
+import org.cl.rest.spring.mvc.domain.Recette;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 import org.mockito.internal.matchers.EndsWith;

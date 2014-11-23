@@ -1,6 +1,6 @@
-package org.cl.rest.spring.rest.config.test;
+package org.cl.rest.spring.mvc.config.test;
 
-import org.cl.rest.spring.dao.RecetteDao;
+import org.cl.rest.spring.mvc.dao.RecetteDao;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package org.cl.rest.spring.rest.controller;
+package org.cl.rest.spring.mvc.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.cl.rest.spring.dao.RecetteDao;
-import org.cl.rest.spring.domain.Recette;
+import org.cl.rest.spring.mvc.dao.RecetteDao;
+import org.cl.rest.spring.mvc.domain.Recette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
