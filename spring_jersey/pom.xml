@@ -14,11 +14,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>test_swagger</groupId>
-			<artifactId>spring_common</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 
 		<!-- jersey -->
 
@@ -92,6 +87,14 @@
 			<artifactId>guava</artifactId>
 			<version>14.0.1</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>		
+		
 	</dependencies>
 
 </project>

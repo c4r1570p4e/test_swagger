@@ -21,9 +21,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.cl.rest.spring.dao.RecetteDao;
-import org.cl.rest.spring.domain.Recette;
 import org.cl.rest.spring.jersey.config.test.MyTestApplication;
+import org.cl.rest.spring.jersey.dao.RecetteDao;
+import org.cl.rest.spring.jersey.domain.Recette;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.test.JerseyTest;

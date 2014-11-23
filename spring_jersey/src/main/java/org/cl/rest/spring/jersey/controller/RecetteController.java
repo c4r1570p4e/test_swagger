@@ -17,8 +17,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import org.cl.rest.spring.dao.RecetteDao;
-import org.cl.rest.spring.domain.Recette;
+import org.cl.rest.spring.jersey.dao.RecetteDao;
+import org.cl.rest.spring.jersey.domain.Recette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

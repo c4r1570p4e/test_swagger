@@ -1,6 +1,6 @@
 package org.cl.rest.spring.jersey.config.test;
 
-import org.cl.rest.spring.dao.RecetteDao;
+import org.cl.rest.spring.jersey.dao.RecetteDao;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
