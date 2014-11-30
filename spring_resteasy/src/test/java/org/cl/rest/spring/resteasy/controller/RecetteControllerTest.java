@@ -12,8 +12,11 @@ import java.util.Arrays;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import org.cl.rest.spring.dao.RecetteDao;
-import org.cl.rest.spring.domain.Recette;
+
+
+
+import org.cl.rest.spring.resteasy.dao.RecetteDao;
+import org.cl.rest.spring.resteasy.domain.Recette;
 import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.mock.MockDispatcherFactory;
 import org.jboss.resteasy.mock.MockHttpRequest;

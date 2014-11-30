@@ -6,7 +6,7 @@
 
 
 	<bean class="org.mockito.Mockito" factory-method="mock">
-		<constructor-arg value="org.cl.rest.spring.dao.RecetteDao" />
+		<constructor-arg value="org.cl.rest.spring.resteasy.dao.RecetteDao" />
 	</bean>
 
 	<context:component-scan base-package="org.cl.rest.spring.resteasy.controller" />
