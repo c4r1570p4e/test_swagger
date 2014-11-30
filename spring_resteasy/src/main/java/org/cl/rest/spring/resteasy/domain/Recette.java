@@ -1,12 +1,9 @@
 package org.cl.rest.spring.resteasy.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@XmlRootElement
 @EqualsAndHashCode(of = { "libelle" })
 public class Recette {
 
