@@ -21,7 +21,6 @@ import lombok.Setter;
 
 import org.cl.rest.spring.resteasy.dao.RecetteDao;
 import org.cl.rest.spring.resteasy.domain.Recette;
-import org.jboss.resteasy.annotations.providers.jaxb.IgnoreMediaTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +31,6 @@ import fj.data.Option;
 @Component
 @Path("recettes")
 @Produces({ "application/json"})
-@IgnoreMediaTypes("application/*+json") 
 public class RecetteController {
 
 	@Context
