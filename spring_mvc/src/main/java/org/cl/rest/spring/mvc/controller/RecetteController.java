@@ -99,7 +99,7 @@ public class RecetteController {
 		int nbMaj = recetteDao.update(recette);
 
 		if (nbMaj == 1) {
-			response.setStatus(HttpStatus.OK.value());
+			response.setStatus(HttpStatus.NO_CONTENT.value());
 			return;
 		} else {
 			response.sendError(HttpStatus.NOT_FOUND.value());
@@ -126,6 +126,9 @@ public class RecetteController {
 			response.sendError(HttpStatus.NOT_FOUND.value());
 			return;
 		}
+		
+		response.setStatus(HttpStatus.NO_CONTENT.value());
+		return;		
 	}
 
 }

@@ -89,7 +89,7 @@ public class RecetteControllerTest {
 		assertThat(response.getStatus()).isEqualTo(200);
 
 		String json = response.getContentAsString();
-		String expected = "[{\"id\":\"1\",\"titre\":\"recette1\",\"niveau\":1,\"recette\":\"bla bla bla bla\",\"temps\":2},{\"id\":\"2\",\"titre\":\"recette2\",\"niveau\":2,\"recette\":\"bla bla bla\",\"temps\":6},{\"id\":\"3\",\"titre\":\"recette3\",\"niveau\":4,\"recette\":\"bla bla\",\"temps\":1}]";
+		String expected = "[{\"id\":\"1\",\"libelle\":\"recette1\",\"niveau\":1,\"recette\":\"bla bla bla bla\",\"temps\":2},{\"id\":\"2\",\"libelle\":\"recette2\",\"niveau\":2,\"recette\":\"bla bla bla\",\"temps\":6},{\"id\":\"3\",\"libelle\":\"recette3\",\"niveau\":4,\"recette\":\"bla bla\",\"temps\":1}]";
 		JSONAssert.assertEquals(expected, json, true);
 
 	}
@@ -137,7 +137,7 @@ public class RecetteControllerTest {
 		assertThat(response.getStatus()).isEqualTo(200);
 
 		String json = response.getContentAsString();
-		String expected = "{\"id\":\"12345\",\"titre\":\"fraisier\",\"niveau\":3,\"recette\":\"Avec une genoise et des fraises...\",\"temps\":2}";
+		String expected = "{\"id\":\"12345\",\"libelle\":\"fraisier\",\"niveau\":3,\"recette\":\"Avec une genoise et des fraises...\",\"temps\":2}";
 		JSONAssert.assertEquals(expected, json, true);
 
 	}
@@ -174,7 +174,7 @@ public class RecetteControllerTest {
 
 		String json = response.getContentAsString();
 		
-		String expected = "[{\"id\":\"12345\",\"titre\":\"macarons chocolat\",\"niveau\":1,\"temps\":2},{\"id\":\"67890\",\"titre\":\"Macarons Pistache\",\"niveau\":2,\"temps\":3}]";
+		String expected = "[{\"id\":\"12345\",\"libelle\":\"macarons chocolat\",\"niveau\":1,\"temps\":2},{\"id\":\"67890\",\"libelle\":\"Macarons Pistache\",\"niveau\":2,\"temps\":3}]";
 		JSONAssert.assertEquals(expected, json, false);
 
 		verify(recetteDao, times(1)).findByLibelle("macarons");
@@ -211,7 +211,7 @@ public class RecetteControllerTest {
 
 		dispatcher.invoke(request, response);
 
-		assertThat(response.getStatus()).isEqualTo(200);
+		assertThat(response.getStatus()).isEqualTo(204);
 
 		verify(recetteDao, times(1)).delete("1");
 	}
@@ -237,7 +237,7 @@ public class RecetteControllerTest {
 		Recette recette = createRecette("12345", "fraisier", 3, 2, "Avec une genoise et des fraises...");
 		when(recetteDao.update(recette)).thenReturn(1);
 
-		String json = "{\"id\":12345,\"titre\":\"fraisier\",\"niveau\":3,\"recette\":\"Avec une genoise et des fraises...\",\"temps\":2}";
+		String json = "{\"id\":12345,\"libelle\":\"fraisier\",\"niveau\":3,\"recette\":\"Avec une genoise et des fraises...\",\"temps\":2}";
 
 		MockHttpRequest request = MockHttpRequest.put("/recettes/12345").contentType(MediaType.APPLICATION_JSON)
 				.content(json.getBytes());
@@ -245,7 +245,7 @@ public class RecetteControllerTest {
 
 		dispatcher.invoke(request, response);
 
-		assertThat(response.getStatus()).isEqualTo(200);
+		assertThat(response.getStatus()).isEqualTo(204);
 
 		verify(recetteDao, times(1)).update(recette);
 	}
@@ -256,7 +256,7 @@ public class RecetteControllerTest {
 		Recette recette = createRecette("12345", "fraisier", 3, 2, "Avec une genoise et des fraises...");
 		when(recetteDao.update(recette)).thenReturn(0);
 
-		String json = "{\"id\":12345,\"titre\":\"fraisier\",\"niveau\":3,\"recette\":\"Avec une genoise et des fraises...\",\"temps\":2}";
+		String json = "{\"id\":12345,\"libelle\":\"fraisier\",\"niveau\":3,\"recette\":\"Avec une genoise et des fraises...\",\"temps\":2}";
 
 		MockHttpRequest request = MockHttpRequest.put("/recettes/12345").contentType(MediaType.APPLICATION_JSON)
 				.content(json.getBytes());
@@ -278,7 +278,7 @@ public class RecetteControllerTest {
 
 		when(recetteDao.create(recette)).thenReturn(newId);
 
-		String json = "{\"titre\":\"Le fraisier\",\"niveau\":2,\"recette\":\"recette secrette\",\"temps\":4}";
+		String json = "{\"libelle\":\"Le fraisier\",\"niveau\":2,\"recette\":\"recette secrette\",\"temps\":4}";
 
 		MockHttpRequest request = MockHttpRequest.post("/recettes").contentType(MediaType.APPLICATION_JSON)
 				.content(json.getBytes());

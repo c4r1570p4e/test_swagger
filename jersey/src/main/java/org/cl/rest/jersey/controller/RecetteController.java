@@ -82,7 +82,7 @@ public class RecetteController {
 		int nbMaj = recetteDao.update(recette);
 
 		if (nbMaj == 1) {
-			return Response.ok().build();
+			return Response.status(Status.NO_CONTENT).build();
 		} else {
 			return Response.status(Status.NOT_FOUND).build();
 		}
@@ -120,7 +120,7 @@ public class RecetteController {
 		}
 
 		if (this.recetteDao.delete(id) == 1) {
-			return Response.status(Status.OK).build();
+			return Response.status(Status.NO_CONTENT).build();
 		} else {
 			return Response.status(Status.NOT_FOUND).build();
 		}

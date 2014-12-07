@@ -164,7 +164,7 @@ public abstract class RecetteControllerTest {
 
         this.mockMvc.perform(put("/recettes/12345").content(flux)
         		.accept(mediaType).contentType(mediaType))
-        .andExpect(status().isOk());
+        .andExpect(status().isNoContent());
 
 		verify(recetteDao, times(1)).update(recette);
 	}
@@ -206,7 +206,7 @@ public abstract class RecetteControllerTest {
 
 		when(recetteDao.delete("1")).thenReturn(1);
 
-		this.mockMvc.perform(delete("/recettes/1").accept(mediaType)).andExpect(status().isOk());
+		this.mockMvc.perform(delete("/recettes/1").accept(mediaType)).andExpect(status().isNoContent());
 
 		verify(recetteDao, times(1)).delete("1");
 	}

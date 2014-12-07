@@ -165,7 +165,7 @@ public abstract class RecetteControllerTest extends JerseyTest {
 		when(recetteDao.update(recette)).thenReturn(1);
 
 		Response response = target("recettes/12345").request(mediaType).put(entity(recette,mediaType));
-		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
+		assertThat(response.getStatus()).isEqualTo(Status.NO_CONTENT.getStatusCode());
 
 		verify(recetteDao, times(1)).update(recette);
 	}
@@ -200,7 +200,8 @@ public abstract class RecetteControllerTest extends JerseyTest {
 	public void should_delete() {
 
 		when(recetteDao.delete("1")).thenReturn(1);
-		target("recettes/1").request(mediaType).delete();
+		Response response = target("recettes/1").request(mediaType).delete();
+		assertThat(response.getStatus()).isEqualTo(Status.NO_CONTENT.getStatusCode());
 		verify(recetteDao, times(1)).delete("1");
 	}
 
