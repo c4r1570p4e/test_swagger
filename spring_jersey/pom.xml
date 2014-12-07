@@ -102,12 +102,6 @@
 		    <version>1.3.10</version>
 		</dependency>			
 		
-		<!-- swagger -->
-		<dependency>
-		    <groupId>com.wordnik</groupId>
-		    <artifactId>swagger-jersey2-jaxrs_2.10</artifactId>
-		    <version>1.3.2</version>
-		</dependency>			
 		
 	</dependencies>
 
