@@ -85,7 +85,7 @@ public class RecetteResource {
 	@ApiOperation(value="Mise à jour d'une recette.", 
 		notes="Met à jour une recette. Il n'est pas possible de modifier l'identifiant de la recette.")
 	@ApiResponses(value={
-			@ApiResponse(code=200,message="La recette a été mise à jour."),
+			@ApiResponse(code=204,message="La recette a été mise à jour."),
 			@ApiResponse(code=400,message="Il n'y a pas de recette passé en body de la request, ou l'id ou le libelle sont absent, ou tentative de modification de l'id"),
 			@ApiResponse(code=404,message="La recette à modifier n'existe pas.")
 	})
@@ -148,7 +148,7 @@ public class RecetteResource {
 	@ApiResponses({
 		 @ApiResponse(code=400, message="L'id de la recette est null ou vide."),
 		 @ApiResponse(code=404, message="Il n'y a pas de recette correspondant cet id"),
-		 @ApiResponse(code=200, message="La recette a été supprimé")
+		 @ApiResponse(code=204, message="La recette a été supprimé")
 	})
 	public Response deleteRecette(@PathParam("id") String id) {
 
