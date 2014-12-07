@@ -13,6 +13,7 @@ public class MyApplication extends ResourceConfig {
 		register(RequestContextFilter.class);
 		register(RecetteResource.class);
 		register(JacksonFeature.class);
+		packages("com.wordnik.swagger.jersey.listing");
 		
 	}
 	
