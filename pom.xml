@@ -43,6 +43,7 @@
 		<module>jersey</module>
 		<module>spring_jersey</module>
 		<module>spring_jersey_jacks2</module>
+		<module>spring_jersey_jacksjaxb2</module>
 		<module>spring_mvc</module>
 		<module>spring_resteasy</module>
 	</modules>
