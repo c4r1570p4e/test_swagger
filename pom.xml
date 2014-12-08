@@ -46,6 +46,7 @@
 		<module>spring_jersey_jacksjaxb2</module>
 		<module>spring_mvc</module>
 		<module>spring_resteasy</module>
+		<module>spring_resteasy_jettison</module>
 	</modules>
 
 	<dependencies>
