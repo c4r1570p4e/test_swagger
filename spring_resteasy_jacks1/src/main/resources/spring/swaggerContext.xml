@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:annotation-config />
+
+	<!-- Swagger providers -->
+	<bean id="apiDeclarationProvider" class="com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider" />
+	<bean id="resourceListingProvider" class="com.wordnik.swagger.jaxrs.listing.ResourceListingProvider" />
+
+	<!-- Swagger API listing resource -->
+	<bean id="swaggerResourceJSON" class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON" />
+
+	<!-- this scans the classes for resources -->
+	<bean id="swaggerConfig" class="com.wordnik.swagger.jaxrs.config.BeanConfig">
+		<property name="resourcePackage" value="org.cl.rest.spring.resteasy.controller" />
+		<property name="version" value="1.0.0" />
+		<property name="basePath" value="http://localhost:8080/spring_resteasy_jacks1" />
+		<property name="scan" value="true" />
+	</bean>
+
+	<bean class="org.cl.rest.spring.resteasy.domain.SwaggerModel" />
+
+</beans>
