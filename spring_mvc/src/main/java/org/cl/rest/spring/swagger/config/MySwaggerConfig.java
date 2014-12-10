@@ -64,23 +64,15 @@ public class MySwaggerConfig {
 	@Bean
 	public Map<RequestMethod, List<ResponseMessage>> defaultResponseMessages() {
 		LinkedHashMap<RequestMethod, List<ResponseMessage>> responses = newLinkedHashMap();
-		responses.put(GET, asList());
-		responses.put(PUT, asList());
-		responses.put(POST, asList());
-		responses.put(DELETE, asList());
-		responses.put(PATCH, asList());
-		responses.put(TRACE, asList());
-		responses.put(OPTIONS, asList());
-		responses.put(HEAD, asList());
+		responses.put(GET, new ArrayList<ResponseMessage>());
+		responses.put(PUT, new ArrayList<ResponseMessage>());
+		responses.put(POST, new ArrayList<ResponseMessage>());
+		responses.put(DELETE, new ArrayList<ResponseMessage>());
+		responses.put(PATCH, new ArrayList<ResponseMessage>());
+		responses.put(TRACE, new ArrayList<ResponseMessage>());
+		responses.put(OPTIONS, new ArrayList<ResponseMessage>());
+		responses.put(HEAD, new ArrayList<ResponseMessage>());
 		return responses;
-	}
-
-	private List<ResponseMessage> asList(ResponseMessage... responseMessages) {
-		List<ResponseMessage> list = new ArrayList<>();
-		for (ResponseMessage responseMessage : responseMessages) {
-			list.add(responseMessage);
-		}
-		return list;
 	}
 
 	@Bean
