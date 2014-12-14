@@ -1,4 +1,4 @@
-package org.cl.rest.spring.jersey.controller;
+package org.cl.rest.spring.jersey.resource;
 
 import java.net.URI;
 import java.util.List;
@@ -29,7 +29,7 @@ import fj.data.Option;
 @Component
 @Path("recettes")
 @Produces({ "application/json","application/xml" })
-public class RecetteController {
+public class RecetteResource {
 
 	@Context
 	private UriInfo uriInfo;
@@ -37,7 +37,7 @@ public class RecetteController {
 	@Autowired
 	private RecetteDao recetteDao;
 
-	public RecetteController() {
+	public RecetteResource() {
 		super();
 	}
 
