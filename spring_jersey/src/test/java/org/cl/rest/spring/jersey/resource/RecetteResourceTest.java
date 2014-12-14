@@ -1,4 +1,4 @@
-package org.cl.rest.spring.jersey.controller;
+package org.cl.rest.spring.jersey.resource;
 
 import static javax.ws.rs.client.Entity.entity;
 import static org.fest.assertions.Assertions.assertThat;
@@ -35,14 +35,14 @@ import com.google.common.collect.Lists;
 
 import fj.data.Option;
 
-public abstract class RecetteControllerTest extends JerseyTest {
+public abstract class RecetteResourceTest extends JerseyTest {
 
 	protected MediaType mediaType = null;
 	
 	@Autowired
 	private RecetteDao recetteDao;
 
-	public RecetteControllerTest(MediaType mediaType) {
+	public RecetteResourceTest(MediaType mediaType) {
 		super();
 		this.mediaType = mediaType;
 	}	
