@@ -13,7 +13,7 @@
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>org.cl.rest.jersey.controller</param-value>
+			<param-value>org.cl.rest.jersey.resource</param-value>
 		</init-param>		
 	 <load-on-startup>1</load-on-startup>  
 	</servlet>  

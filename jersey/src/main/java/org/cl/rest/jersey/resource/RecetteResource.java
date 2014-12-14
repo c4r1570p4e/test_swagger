@@ -1,4 +1,4 @@
-package org.cl.rest.jersey.controller;
+package org.cl.rest.jersey.resource;
 
 import java.net.URI;
 import java.util.List;
@@ -31,7 +31,7 @@ import fj.data.Option;
 @Singleton
 @Path("recettes")
 @Produces({ "application/json","application/xml" })
-public class RecetteController {
+public class RecetteResource {
 
 	@Context
 	private UriInfo uriInfo;
@@ -40,7 +40,7 @@ public class RecetteController {
 	@Setter
 	private RecetteDao recetteDao;
 
-	public RecetteController() {
+	public RecetteResource() {
 		super();
 	}
 

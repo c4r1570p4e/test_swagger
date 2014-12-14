@@ -1,4 +1,4 @@
-package org.cl.rest.jersey.controller;
+package org.cl.rest.jersey.resource;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.Fail.fail;
@@ -36,7 +36,7 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 
 import fj.data.Option;
 
-public abstract class RecetteControllerTest extends JerseyTest {
+public abstract class RecetteResourceTest extends JerseyTest {
 
 	private static AppDescriptor APP_DESCRIPTOR;
 	
@@ -61,7 +61,7 @@ public abstract class RecetteControllerTest extends JerseyTest {
 
 	private RecetteDao recetteDao = InjectableProviderContext.getInjectableObjectForClass(RecetteDao.class);
 
-	public RecetteControllerTest(MediaType mediaType) throws Exception {
+	public RecetteResourceTest(MediaType mediaType) throws Exception {
 		super(APP_DESCRIPTOR);
 		this.mediaType = mediaType;
 	}
