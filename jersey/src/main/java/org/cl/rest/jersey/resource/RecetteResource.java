@@ -46,7 +46,7 @@ public class RecetteResource {
 	@Setter
 	private RecetteDao recetteDao;
 
-	public RecetteController() {
+	public RecetteResource() {
 		super();
 	}
 
