@@ -23,20 +23,6 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<servlet>
-	  <servlet-name>JerseyJaxrsConfig</servlet-name>
-	  <servlet-class>com.wordnik.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
-	  <init-param>
-	    <param-name>api.version</param-name>
-	    <param-value>0.1-SNAPSHOT</param-value>
-	  </init-param>
-	  <init-param>
-	    <param-name>swagger.api.basepath</param-name>
-	    <param-value>http://localhost:8080/spring_jersey/rest</param-value>
-	  </init-param>
-	  <load-on-startup>2</load-on-startup>
-	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>restApplication</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
